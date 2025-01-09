@@ -8,7 +8,7 @@ logger = setup_logger(__name__)
 
 def main(dir_paths: list):
     positions = [(400, 220), (230, 300)]  # List of positions
-    width, height = 150, 75  # Resize the signature (optional)
+    width, height = 100, 80  # Resize the signature (optional)
 
     assets_dir = os.listdir("assets")
     for sub_d in DIR_PATHS:
