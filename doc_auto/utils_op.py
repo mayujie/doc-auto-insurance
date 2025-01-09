@@ -1,6 +1,7 @@
 from typing import Optional
 import os
 import fitz  # PyMuPDF
+import pikepdf
 from .utils_page import identify_blank_pages
 
 
@@ -72,3 +73,25 @@ def insert_signatures(
         output_path = os.path.join('outputs', os.path.basename(output_path))
     pdf_document.save(output_path)
     pdf_document.close()
+
+
+def compress_pdf(input_path, output_path):
+    """
+    Compress a PDF file using pikepdf.
+
+    Args:
+        input_path (str): Path to the input PDF.
+        output_path (str): Path to save the compressed PDF.
+
+    Returns:
+        None
+    """
+    try:
+        # Open the original PDF
+        pdf = pikepdf.Pdf.open(input_path)
+
+        # Save the optimized version
+        pdf.save(output_path)
+        print(f"Compressed PDF saved as: {output_path}")
+    except Exception as e:
+        print(f"Error compressing PDF: {e}")
