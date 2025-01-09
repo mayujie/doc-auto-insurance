@@ -1,6 +1,7 @@
 # Ignore all files inside the assets and out folders
 assets/*
 outputs/*
+output_single/*
 c1_amuatu/*
 c2_toyar/*
 c3_frano/*
@@ -10,6 +11,7 @@ c5_commercia/*
 # But keep the folders themselves
 !assets/
 !outputs/
+!output_single/
 
 # Ignore Python bytecode files
 __pycache__/
