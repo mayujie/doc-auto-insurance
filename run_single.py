@@ -40,14 +40,14 @@ def insert_signatures(pdf_path, output_path, image_path, page_number, positions,
 pdf_path = "c1_amuatu/1 Skan001.pdf"
 output_path = "output_single/Skan001_signed.pdf"
 
-image_path = "assets/1_amuatu_NoBG.png"
+# image_path = "assets/1_amuatu_NoBG.png"
 # image_path = "assets/2_toyar_NoBG.png"
 # image_path = "assets/3_frano_NoBG.png"
 # image_path = "assets/4_lsy_NoBG.png"
-# image_path = "assets/5_commercia_NoBG.png"
+image_path = "assets/5_commercia_NoBG.png"
 
 page_number = 3  # Insert which page number
 positions = [(400, 220), (230, 300)]  # List of positions
-width, height = 100, 80  # Resize the signature (optional)
+width, height = 100, 100  # Resize the signature (optional)
 
 insert_signatures(pdf_path, output_path, image_path, page_number, positions, width, height)
