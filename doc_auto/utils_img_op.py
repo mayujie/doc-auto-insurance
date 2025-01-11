@@ -8,6 +8,19 @@ def crop_image(
         right_crop: int,
         bottom_crop: int,
 ):
+    """
+    Define the cropping box (left, upper, right, lower)
+
+    Args:
+        param img:
+        param left_crop:
+        param top_crop:
+        param right_crop:
+        param bottom_crop:
+
+    Returns:
+        None
+    """
     # Get the dimensions of the image
     width, height = img.size
 
