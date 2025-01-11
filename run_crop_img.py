@@ -1,14 +1,24 @@
 from PIL import Image
+from doc_auto.utils_img_op import crop_image
 
 
-def crop_image(input_path, output_path, top_crop=300, bottom_crop=200):
+def run_crop_image(
+        input_path: str,
+        output_path: str,
+        left_crop: int = 0,
+        top_crop: int = 300,
+        right_crop: int = 0,
+        bottom_crop: int = 200
+):
     """
     Crop the top and bottom of the PNG image.
 
     Args:
         input_path (str): Path to the input PNG image.
         output_path (str): Path to save the cropped image.
-        top_crop (int): Number of pixels to crop from the top (default 200).
+        left_crop (int): Number of pixels to crop from the left (default 0).
+        top_crop (int): Number of pixels to crop from the top (default 300).
+        right_crop (int): Number of pixels to crop from the right (default 0).
         bottom_crop (int): Number of pixels to crop from the bottom (default 200).
 
     Returns:
@@ -17,14 +27,13 @@ def crop_image(input_path, output_path, top_crop=300, bottom_crop=200):
     # Open the image
     img = Image.open(input_path)
 
-    # Get the dimensions of the image
-    width, height = img.size
-
-    # Define the cropping box (left, upper, right, lower)
-    crop_box = (0, top_crop, width, height - bottom_crop)
-
-    # Crop the image
-    cropped_img = img.crop(crop_box)
+    cropped_img = crop_image(
+        img=img,
+        left_crop=left_crop,
+        top_crop=top_crop,
+        right_crop=right_crop,
+        bottom_crop=bottom_crop
+    )
 
     # Save the cropped image
     cropped_img.save(output_path)
@@ -33,4 +42,4 @@ def crop_image(input_path, output_path, top_crop=300, bottom_crop=200):
 # Example usage
 input_path = "assets/amu.png"
 output_path = "assets/cropped_image.png"
-crop_image(input_path, output_path)
+run_crop_image(input_path, output_path, top_crop=300, bottom_crop=200)
