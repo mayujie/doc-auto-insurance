@@ -31,6 +31,6 @@ def crop_image(input_path, output_path, top_crop=300, bottom_crop=200):
 
 
 # Example usage
-input_path = "assets/1_amuatu_NoBG.png"
+input_path = "assets/amu.png"
 output_path = "assets/cropped_image.png"
 crop_image(input_path, output_path)
