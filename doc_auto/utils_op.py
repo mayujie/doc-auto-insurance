@@ -71,6 +71,8 @@ def insert_signatures(
     if output_path is None:
         output_path = os.path.splitext(pdf_path)[0] + "_signed" + os.path.splitext(pdf_path)[1]
         output_path = os.path.join('outputs', os.path.basename(output_path))
+    if not os.path.exists(output_path):
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
     pdf_document.save(output_path)
     pdf_document.close()
 

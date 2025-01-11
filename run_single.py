@@ -1,3 +1,4 @@
+import os
 import fitz  # PyMuPDF
 
 
@@ -31,23 +32,26 @@ def insert_signatures(pdf_path, output_path, image_path, page_number, positions,
             rect = None  # Use the image's original dimensions
         page.insert_image(rect, filename=image_path)
 
+    if not os.path.exists(output_path):
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
     # Save the updated PDF
     pdf_document.save(output_path)
     pdf_document.close()
 
 
-# Example usage
-pdf_path = "c1_amuatu/1 Skan001.pdf"
-output_path = "output_single/Skan001_signed.pdf"
+if __name__ == "__main__":
+    pdf_path = "c1_amuatu/1 Skan001.pdf"
+    output_path = "output_single/Skan001_signed.pdf"
 
-# image_path = "assets/1_amuatu_NoBG.png"
-# image_path = "assets/2_toyar_NoBG.png"
-# image_path = "assets/3_frano_NoBG.png"
-# image_path = "assets/4_lsy_NoBG.png"
-image_path = "assets/5_commercia_NoBG.png"
+    # image_path = "assets/1_amuatu_NoBG.png"
+    # image_path = "assets/2_toyar_NoBG.png"
+    # image_path = "assets/3_frano_NoBG.png"
+    # image_path = "assets/4_lsy_NoBG.png"
+    image_path = "assets/5_commercia_NoBG.png"
 
-page_number = 3  # Insert which page number
-positions = [(400, 220), (230, 300)]  # List of positions
-width, height = 100, 100  # Resize the signature (optional)
+    page_number = 3  # Insert which page number
+    positions = [(400, 220), (230, 300)]  # List of positions
+    width, height = 100, 100  # Resize the signature (optional)
 
-insert_signatures(pdf_path, output_path, image_path, page_number, positions, width, height)
+    insert_signatures(pdf_path, output_path, image_path, page_number, positions, width, height)

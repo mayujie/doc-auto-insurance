@@ -7,3 +7,19 @@ Run the following command to make the white background transparent:
 convert stamp_edit.png -transparent white stamp_edit_NoBG.png
 ```
 
+## Tesseract OCR settings
+
+1. Install Tesseract and pytesseract
+```bash
+sudo apt update
+sudo apt install tesseract-ocr
+sudo apt install tesseract-ocr-pol
+
+# Verify Language Data Installation
+tesseract --version
+tesseract --list-langs
+```
+2.Install the Python wrapper for Tesseract:
+```bash
+pip install pytesseract
+```

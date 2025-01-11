@@ -1,7 +1,6 @@
 import os
 import re
 from doc_auto.utils_log import setup_logger
-from doc_auto.utils_page import identify_empty_pages, identify_blank_pages
 from doc_auto.utils_op import insert_signatures
 
 logger = setup_logger(__name__)
