@@ -1,7 +1,10 @@
-from typing import Optional
 import os
+from typing import Optional
+
 import fitz  # PyMuPDF
 import pikepdf
+
+from .utils_page import extract_info_from_page_by_ocr
 from .utils_page import identify_blank_pages
 
 
@@ -22,14 +25,15 @@ def identify_insert_page_according_blank_page(blank_page_number: int, num_doc_pa
 
 
 def insert_signatures(
-        pdf_path,
-        image_path,
+        pdf_path: str,
+        image_path: str,
         positions: list,
         output_path: Optional[str] = None,
         page_number: Optional[int] = None,
         width=None,
-        height=None
-):
+        height=None,
+        use_ocr: bool = False,
+) -> list:
     """
     Insert a transparent PNG signature into a PDF at multiple positions on a specified page.
 
@@ -43,10 +47,15 @@ def insert_signatures(
         height (float, optional): Desired height of the image. If None, the original image height is used.
 
     Returns:
-        None
+        list
     """
     # Open the PDF
     pdf_document = fitz.open(pdf_path)
+    if use_ocr:
+        info_1st_page = extract_info_from_page_by_ocr(doc=pdf_document)
+    else:
+        info_1st_page = None
+
     if page_number is None:
         blank_page_number = identify_blank_pages(document=pdf_document)
         num_page_todo = identify_insert_page_according_blank_page(
@@ -75,6 +84,8 @@ def insert_signatures(
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
     pdf_document.save(output_path)
     pdf_document.close()
+
+    return info_1st_page
 
 
 def compress_pdf(input_path, output_path):

@@ -1,10 +1,13 @@
 from typing import Optional, Union
-
+import os
 import fitz  # PyMuPDF
 import numpy as np
+from PIL import Image, ImageOps
 from PyPDF2 import PdfReader
 
+from doc_auto.utils_img_op import crop_image
 from doc_auto.utils_log import setup_logger
+from doc_auto.utils_ocr import extract_important_info_by_ocr
 
 logger = setup_logger(__name__)
 
@@ -69,3 +72,38 @@ def identify_blank_pages(pdf_path: Optional[str] = None, document: Optional[fitz
     else:
         logger.warning("No blank pages found.")
         return None
+
+
+def extract_info_from_page_by_ocr(doc: fitz.Document):
+    page_number = 0
+    page = doc[page_number]
+
+    zoom_x = 2.0  # Horizontal zoom factor
+    zoom_y = 2.0  # Vertical zoom factor
+    matrix = fitz.Matrix(zoom_x, zoom_y)  # Scale the resolution
+    pix = page.get_pixmap(matrix=matrix)  # Render the page with higher resolution
+
+    # Convert pixmap to PIL Image
+    image = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+    # Crop the image
+    cropped_img = crop_image(
+        img=image,
+        left_crop=50,
+        top_crop=580,
+        right_crop=50,
+        bottom_crop=500
+    )
+    # image = image.resize((image.width * 2, image.height * 2))  # Resize to improve OCR accuracy
+    image = ImageOps.grayscale(cropped_img)  # Convert to grayscale
+    image = ImageOps.autocontrast(image)  # Improve contrast
+    # image = image.point(lambda x: 0 if x < 160 else 255, '1') # Binarize (thresholding)
+
+    # Display the image using Pillow
+    # image.show()
+
+    ocr_save_dir = 'output_ocr'
+    if not os.path.exists(ocr_save_dir):
+        os.makedirs(ocr_save_dir, exist_ok=True)
+    image.save(os.path.join(ocr_save_dir, 'preprocessed_image.jpg'))
+    pdf_ocr_info = extract_important_info_by_ocr(image=image)
+    return pdf_ocr_info
