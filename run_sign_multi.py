@@ -6,7 +6,11 @@ from doc_auto.utils_op import insert_signatures
 logger = setup_logger(__name__)
 
 
-def main(dir_paths: list, use_ocr: bool = False):
+def main(
+        dir_paths: list,
+        use_ocr: bool = False,
+        create_blurred_pdf: bool = True,
+):
     positions = [(400, 220), (230, 300)]  # List of positions
     width, height = 100, 100  # Resize the signature (optional)
 
@@ -35,6 +39,7 @@ def main(dir_paths: list, use_ocr: bool = False):
                 page_number=None,
                 output_path=None,
                 use_ocr=use_ocr,
+                create_blurred_pdf=create_blurred_pdf,
             )
             all_pdf_extracted_info.append(extract_info)
 

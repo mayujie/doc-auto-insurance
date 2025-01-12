@@ -1,4 +1,5 @@
 import os
+import re
 from typing import Optional
 
 import fitz  # PyMuPDF
@@ -6,6 +7,7 @@ import pikepdf
 
 from .utils_page import extract_info_from_page_by_ocr
 from .utils_page import identify_blank_pages
+from .utils_page import add_white_rectangle_to_page
 
 
 def identify_insert_page_according_blank_page(blank_page_number: int, num_doc_pages: int):
@@ -33,6 +35,7 @@ def insert_signatures(
         width=None,
         height=None,
         use_ocr: bool = False,
+        create_blurred_pdf: bool = True,
 ) -> list:
     """
     Insert a transparent PNG signature into a PDF at multiple positions on a specified page.
@@ -52,7 +55,27 @@ def insert_signatures(
     # Open the PDF
     pdf_document = fitz.open(pdf_path)
     if use_ocr:
-        info_1st_page = extract_info_from_page_by_ocr(doc=pdf_document)
+        info_1st_page, info_nr_plate = extract_info_from_page_by_ocr(doc=pdf_document)
+        if create_blurred_pdf:
+            if not info_nr_plate:
+                pattern = r'\d+_(.*?)_NoBG.png'
+                match = re.search(pattern, image_path)
+                if match:
+                    info_nr_plate = [match.group(1)]
+                else:
+                    raise ValueError(f"No match found in {image_path}")
+
+            add_white_rectangle_to_page(
+                pdf_doc=pdf_document,
+                info_1st_page=info_1st_page,
+                info_nr_plate=info_nr_plate,
+                rect_x0=40,  # Top-left X
+                rect_y0=454.5,  # Top-left Y
+                rect_x1=400,  # Bottom-right X
+                rect_y1=580,  # Bottom-right Y
+                color=(1, 1, 1),
+                page_number=0,
+            )
     else:
         info_1st_page = None
 
@@ -79,9 +102,10 @@ def insert_signatures(
     # Save the updated PDF
     if output_path is None:
         output_path = os.path.splitext(pdf_path)[0] + "_signed" + os.path.splitext(pdf_path)[1]
-        output_path = os.path.join('outputs', os.path.basename(output_path))
+        output_path = os.path.join('outputs', info_nr_plate[0] + "_" + os.path.basename(output_path))
     if not os.path.exists(output_path):
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
     pdf_document.save(output_path)
     pdf_document.close()
 

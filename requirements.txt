@@ -4,3 +4,4 @@ pymupdf
 Pillow
 pikepdf
 pytesseract
+opencv-python

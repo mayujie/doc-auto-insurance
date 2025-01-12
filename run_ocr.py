@@ -10,7 +10,7 @@ if __name__ == '__main__':
     list_doc_ocr_results = []
     for pdf_path in list_pdf:
         pdf_document = fitz.open(pdf_path)
-        info_1st_page = extract_info_from_page_by_ocr(doc=pdf_document)
+        info_1st_page, info_nr_plate = extract_info_from_page_by_ocr(doc=pdf_document)
         list_doc_ocr_results.append(info_1st_page)
 
     # Open the file in write mode (it will overwrite the file if it exists)

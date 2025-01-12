@@ -37,9 +37,9 @@ def extract_important_info_by_ocr(image):
     # print(text) # Output the extracted text
 
     # Regular expression to extract the first match
-    company_pattern = r"\nUbezpieczający\n(.*?)SPÓŁKA Z OGRANICZONĄ\nODPOWIEDZIALNOŚCIĄ\n"
+    company_pattern = r"(\S+)(?=\s*SPÓŁKA Z )"
     polisy_nr_pattern = r"(?:numer polisy:|Polisa nr)\s*(\d+)\n"
-    company_adres_pattern = r"\n\nadres:\s*(.*?)\ne-mail"
+    company_adres_pattern = r"\n\nadres:\s*(.*?)\n(?:e-mail|\n)"
 
     payer_info = match_content_by_list_regex(
         text=text,
@@ -51,7 +51,8 @@ def extract_important_info_by_ocr(image):
     if len(payer_info) != 3:
         raise ValueError("The length of payer_info is not 3. It is {}".format(len(payer_info)))
 
-    payment_pattern = r"\n\nPłatności\n\n(.*?)(\nóżnica:|termin płatności:)"
+    payment_pattern = r"(?:\n\nPłatności\n\n|:\s*)(.*?)(\nóżnica:|termin płatności:|płatność:)"
+    # payment_pattern = r"(?:\n\nPłatności\n\n|\s*:)([\s\S]*?)(\nóżnica:|termin płatności:)"
     recipient_text = match_content_by_list_regex(
         text=text,
         list_regex=[payment_pattern],
@@ -81,3 +82,15 @@ def extract_important_info_by_ocr(image):
     final_results = clean_up_item_in_list(list_items=final_results, string_to_clean="ALEJA", new_string="al")
 
     return final_results
+
+
+def extract_nr_rejestracyjny_by_ocr(image):
+    text = pytesseract.image_to_string(image, lang='pol')  # Perform OCR
+    # print(text) # Output the extracted text
+    nr_rejestracyjny_pattern = r"\nnr rejestracyjny:\s*(.*?)(\n|\s)"
+    nr_rejestracyjny_info = match_content_by_list_regex(
+        text=text,
+        list_regex=[nr_rejestracyjny_pattern],
+        num_content_to_remove_space=0
+    )
+    return nr_rejestracyjny_info
