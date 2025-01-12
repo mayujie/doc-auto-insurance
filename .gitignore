@@ -1,15 +1,20 @@
-# Ignore all files inside the assets and out folders
+# Ignore all files inside the specified folders
 assets/*
-outputs/*
-output_single/*
 c1_amuatu/*
 c2_toyar/*
 c3_frano/*
 c4_lsy/*
 c5_commercia/*
+outputs/*
+output_single/*
 
-# But keep the folders themselves
+# But explicitly keep the folders themselves
 !assets/
+!c1_amuatu/
+!c2_toyar/
+!c3_frano/
+!c4_lsy/
+!c5_commercia/
 !outputs/
 !output_single/
 
