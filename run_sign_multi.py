@@ -61,4 +61,4 @@ if __name__ == "__main__":
     logger.info(f"Main root path: {ROOT_DIR}")
     logger.info(f"{DIR_PATHS}")
 
-    main(dir_paths=DIR_PATHS, use_ocr=True)
+    main(dir_paths=DIR_PATHS, use_ocr=True, create_blurred_pdf=True)

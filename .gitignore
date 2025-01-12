@@ -6,6 +6,7 @@ c3_frano/*
 c4_lsy/*
 c5_commercia/*
 outputs/*
+outputs_blurred/*
 output_single/*
 output_ocr/*
 
@@ -17,6 +18,7 @@ output_ocr/*
 !c4_lsy/
 !c5_commercia/
 !outputs/
+!outputs_blurred/
 !output_single/
 !output_ocr/
 
