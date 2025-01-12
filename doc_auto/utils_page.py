@@ -191,7 +191,12 @@ def add_white_rectangle_to_page(
     if not os.path.exists(save_out_dir):
         os.makedirs(save_out_dir, exist_ok=True)
 
-    save_file_key_info = (info_1st_page[4], info_nr_plate[0], info_1st_page[5])
-    output_path = os.path.join(save_out_dir, "_".join(save_file_key_info) + '.pdf')
+    if info_nr_plate is None:
+        save_file_key_info = (info_1st_page[4], info_nr_plate[0], info_1st_page[5])
+        output_path = os.path.join(save_out_dir, "_".join(save_file_key_info) + '.pdf')
+    else:
+        save_file_key_info = (info_nr_plate[0])
+        output_path = os.path.join(save_out_dir, f"{save_file_key_info}_polisy.pdf")
+        # output_path = os.path.join(save_out_dir, f"polisy.pdf")
     save_single_page(pdf_doc=pdf_document, page_number=page_number, output_path=output_path)
     print(f"White rectangle added to page {page_number + 1} and saved to {output_path}.")

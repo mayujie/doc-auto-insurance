@@ -7,7 +7,7 @@ c4_lsy/*
 c5_commercia/*
 outputs/*
 outputs_blurred/*
-output_single/*
+single_output/*
 output_ocr/*
 
 # But explicitly keep the folders themselves
@@ -19,7 +19,7 @@ output_ocr/*
 !c5_commercia/
 !outputs/
 !outputs_blurred/
-!output_single/
+!single_output/
 !output_ocr/
 
 # Ignore Python bytecode files
