@@ -85,20 +85,20 @@ def insert_signatures(
 
 if __name__ == "__main__":
     # PDF_PATH = "c1_amuatu/Skan001.pdf"
-    # IMG_PATH = "assets/1_amuatu_NoBG.png"
+    # IMG_PATH = "assets_stamps/1_amuatu_NoBG.png"
 
     PDF_PATH = "c2_toyar/Skan001.pdf"
-    IMG_PATH = "assets/2_toyar_NoBG.png"
+    IMG_PATH = "assets_stamps/2_toyar_NoBG.png"
 
     PDF_PATH = "c3_frano/Skan001.pdf"
-    IMG_PATH = "assets/3_frano_NoBG.png"
+    IMG_PATH = "assets_stamps/3_frano_NoBG.png"
 
     # PDF_PATH = "c4_lsy/W2200P31 Polisa do podpisu.pdf"
     # PDF_PATH = "c4_lsy/W2200P34 Polisa do podpisu.pdf"
-    # IMG_PATH = "assets/4_lsy_NoBG.png"
+    # IMG_PATH = "assets_stamps/4_lsy_NoBG.png"
 
     # PDF_PATH = "c5_commercia/Skan001.pdf"
-    # IMG_PATH = "assets/5_commercia_NoBG.png"
+    # IMG_PATH = "assets_stamps/5_commercia_NoBG.png"
 
     OUTPUT_PDF_PATH = "single_output/Skan001_signed.pdf"
 

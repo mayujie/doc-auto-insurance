@@ -14,7 +14,7 @@ def main(
     positions = [(400, 220), (230, 300)]  # List of positions
     width, height = 100, 100  # Resize the signature (optional)
 
-    assets_dir = os.listdir("assets")
+    assets_dir = os.listdir("assets_stamps")
     all_pdf_extracted_info = []
 
     for sub_d in DIR_PATHS:
@@ -22,7 +22,7 @@ def main(
         pattern = r'c\d+_(\w+)'
         c_keyname = re.match(pattern, sub_d).group(1)
         sign_filename = [s_file for s_file in assets_dir if c_keyname in s_file][0]
-        sign_filepath = os.path.join('assets', sign_filename)
+        sign_filepath = os.path.join("assets_stamps", sign_filename)
 
         sub_d_path = os.path.join(ROOT_DIR, sub_d)
         pdf_paths = [os.path.join(sub_d_path, f_name) for f_name in os.listdir(sub_d_path)]

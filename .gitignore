@@ -1,5 +1,5 @@
 # Ignore all files inside the specified folders
-assets/*
+assets_stamps/*
 c1_amuatu/*
 c2_toyar/*
 c3_frano/*
@@ -11,7 +11,7 @@ single_output/*
 output_ocr/*
 
 # But explicitly keep the folders themselves
-!assets/
+!assets_stamps/
 !c1_amuatu/
 !c2_toyar/
 !c3_frano/

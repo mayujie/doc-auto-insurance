@@ -40,6 +40,6 @@ def run_crop_image(
 
 
 # Example usage
-input_path = "assets/amu.png"
-output_path = "assets/cropped_image.png"
+input_path = "assets_stamps/amu.png"
+output_path = "assets_stamps/cropped_image.png"
 run_crop_image(input_path, output_path, top_crop=300, bottom_crop=200)
