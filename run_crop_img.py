@@ -11,7 +11,7 @@ def run_crop_image(
         bottom_crop: int = 200
 ):
     """
-    Crop the top and bottom of the PNG image.
+    Crop the left, top, right and bottom of the image.
 
     Args:
         input_path (str): Path to the input PNG image.

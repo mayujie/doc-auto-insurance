@@ -14,9 +14,9 @@ def insert_signatures(
         positions,
         width=None,
         height=None,
-        blur_start_point: tuple = None,
-        blur_end_point: tuple = None,
-        blur_color: tuple = None,
+        cover_start_point: tuple = None,
+        cover_end_point: tuple = None,
+        cover_color: tuple = None,
 ):
     """
     Insert a transparent PNG signature into a PDF at multiple positions on a specified page.
@@ -70,11 +70,11 @@ def insert_signatures(
         pdf_doc=pdf_document,
         info_1st_page=None,
         info_nr_plate=info_nr_plate,
-        rect_x0=blur_start_point[0],  # Top-left X
-        rect_y0=blur_start_point[1],  # Top-left Y
-        rect_x1=blur_end_point[0],  # Bottom-right X
-        rect_y1=blur_end_point[1],  # Bottom-right Y
-        color=blur_color,
+        rect_x0=cover_start_point[0],  # Top-left X
+        rect_y0=cover_start_point[1],  # Top-left Y
+        rect_x1=cover_end_point[0],  # Bottom-right X
+        rect_y1=cover_end_point[1],  # Bottom-right Y
+        color=cover_color,
         page_number=0,
     )
 
@@ -107,10 +107,10 @@ if __name__ == "__main__":
     # SIGN_COORDINATES = [(400, 190), (230, 250)]  # List of positions
     SIGN_W, SIGN_H = 100, 100  # Resize the signature (optional)
 
-    # BLUR_START_POINT = (40, 454.5)
-    # BLUR_START_POINT = (28, 484.5)
-    BLUR_START_POINT = (40, 464.5)
-    BLUR_END_POINT = (400, 580)
+    # COVER_START_POINT = (40, 454.5)
+    # COVER_START_POINT = (28, 484.5)
+    COVER_START_POINT = (40, 464.5)
+    COVER_END_POINT = (400, 580)
 
     insert_signatures(
         pdf_path=PDF_PATH,
@@ -120,7 +120,7 @@ if __name__ == "__main__":
         positions=SIGN_COORDINATES,
         width=SIGN_W,
         height=SIGN_H,
-        blur_start_point=BLUR_START_POINT,
-        blur_end_point=BLUR_END_POINT,
-        blur_color=(1, 1, 1),  # White color for blur effect
+        cover_start_point=COVER_START_POINT,
+        cover_end_point=COVER_END_POINT,
+        cover_color=(1, 1, 1),  # White color for cover effect
     )
