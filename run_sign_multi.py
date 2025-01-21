@@ -11,8 +11,15 @@ def main(
         use_ocr: bool = False,
         create_blurred_pdf: bool = True,
 ):
-    positions = [(400, 220), (230, 300)]  # List of positions
-    width, height = 100, 100  # Resize the signature (optional)
+    positions = [
+        # (400, 220),
+        # (230, 300)
+
+        (400, 170),
+        (230, 250)
+    ]  # List of positions
+    # width, height = 100, 100  # Resize the signature (optional)
+    width, height = 120, 120  # Resize the signature (optional)
 
     assets_dir = os.listdir("assets_stamps")
     all_pdf_extracted_info = []
@@ -57,7 +64,7 @@ def main(
 
 if __name__ == "__main__":
     ROOT_DIR = os.path.dirname(__file__)
-    DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c')]
+    DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c1')]
     logger.info(f"Main root path: {ROOT_DIR}")
     logger.info(f"{DIR_PATHS}")
 

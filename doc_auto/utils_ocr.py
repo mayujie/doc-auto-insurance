@@ -62,7 +62,8 @@ def extract_important_info_by_ocr(image):
     recipient_name_pattern = r"\n*\s*odbiorca:\s*(.*?)\n"
     recipient_adres_pattern = r"SA\n(.*?)\nnr rachunku:"
     recipient_bank_pattern = r"\nnr rachunku:\s*(.*?)\ntytuł"
-    pay_amount_pattern = r"(?:kwota:|składka przed zmianą:|składka po zmianie:)\s*(\d+)\s?(?:zł|zl)"
+    # pay_amount_pattern = r"(?:kwota:|składka przed zmianą:|składka po zmianie:)\s*(\d+)\s?(?:zł|zl)"
+    pay_amount_pattern = r"(?:kwota:\s*|składka przed zmianą:|składka po zmianie:)\s*([\d\s]+)\s?(?:zł|zl)" # allow for spaces between digits
 
     recipient_detail_info = match_content_by_list_regex(
         # text=text,
