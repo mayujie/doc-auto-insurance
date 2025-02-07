@@ -5,10 +5,10 @@ c2_toyar/*
 c3_frano/*
 c4_lsy/*
 c5_commercia/*
-outputs/*
-outputs_blurred/*
-single_output/*
-output_ocr/*
+res_outputs/*
+res_outputs_blurred/*
+res_single_output/*
+res_output_ocr/*
 
 # But explicitly keep the folders themselves
 !assets_stamps/
@@ -17,10 +17,10 @@ output_ocr/*
 !c3_frano/
 !c4_lsy/
 !c5_commercia/
-!outputs/
-!outputs_blurred/
-!single_output/
-!output_ocr/
+!res_outputs/
+!res_outputs_blurred/
+!res_single_output/
+!res_output_ocr/
 
 # Ignore Python bytecode files
 __pycache__/

@@ -18,10 +18,10 @@ auto fill insurance
 
 4. [run_ocr.py](run_ocr.py)
 
-   Using OCR to extract 1st page information from each pdf under folder `"outputs"`  and save them to `output_ocr/results_ocr.txt`
+   Using OCR to extract 1st page information from each pdf under folder `"res_outputs"`  and save them to `output_ocr/results_ocr.txt`
 5. [run_compress_pdf.py](run_compress_pdf.py)
    
-   Compress each pdf file under `"outputs"` and save compressed pdf with suffix `_cps`
+   Compress each pdf file under `"res_outputs"` and save compressed pdf with suffix `_cps`
 
 6. [run_crop_img.py](run_crop_img.py)
    

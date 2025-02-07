@@ -100,7 +100,7 @@ if __name__ == "__main__":
     # PDF_PATH = "c5_commercia/Skan001.pdf"
     # IMG_PATH = "assets_stamps/5_commercia_NoBG.png"
 
-    OUTPUT_PDF_PATH = "single_output/Skan001_signed.pdf"
+    OUTPUT_PDF_PATH = "res_single_output/Skan001_signed.pdf"
 
     SIGN_PAGE_NUM = None  # Insert which page number
     SIGN_COORDINATES = [(400, 220), (230, 300)]  # List of positions

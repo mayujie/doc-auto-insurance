@@ -55,7 +55,18 @@ def insert_signatures(
     # Open the PDF
     pdf_document = fitz.open(pdf_path)
     if use_ocr:
-        info_1st_page, info_nr_plate = extract_info_from_page_by_ocr(doc=pdf_document)
+        start_left_crop_x = 40  # Initial value for left crop X
+        while True:
+            try:
+                # Attempt to extract OCR information
+                info_1st_page, info_nr_plate = extract_info_from_page_by_ocr(
+                    doc=pdf_document, left_crop_x=start_left_crop_x
+                )
+                break  # Exit loop if successful
+            except Exception as e:
+                print(f"Error occurred: {e}, increasing start_left_crop_x to {start_left_crop_x + 1}")
+                start_left_crop_x += 1  # Increment and retry
+
         if create_blurred_pdf:
             if not info_nr_plate:
                 pattern = r'\d+_(.*?)_NoBG.png'
@@ -69,8 +80,8 @@ def insert_signatures(
                 pdf_doc=pdf_document,
                 info_1st_page=info_1st_page,
                 info_nr_plate=info_nr_plate,
-                rect_x0=40,  # Top-left X
-                rect_y0=454.5,  # Top-left Y
+                rect_x0=20,  # Top-left X
+                rect_y0=450.5,  # Top-left Y
                 rect_x1=400,  # Bottom-right X
                 rect_y1=580,  # Bottom-right Y
                 color=(1, 1, 1),
@@ -102,7 +113,7 @@ def insert_signatures(
     # Save the updated PDF
     if output_path is None:
         output_path = os.path.splitext(pdf_path)[0] + "_signed" + os.path.splitext(pdf_path)[1]
-        output_path = os.path.join('outputs', info_nr_plate[0] + "_" + os.path.basename(output_path))
+        output_path = os.path.join('res_outputs', info_nr_plate[0] + "_" + os.path.basename(output_path))
     if not os.path.exists(output_path):
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
 

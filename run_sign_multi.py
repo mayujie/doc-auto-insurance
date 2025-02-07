@@ -52,7 +52,7 @@ def main(
 
     if use_ocr:
         # Open the file in write mode (it will overwrite the file if it exists)
-        with open("outputs/records.txt", "w") as file:
+        with open("res_outputs/records.txt", "w") as file:
             for idx, item in enumerate(all_pdf_extracted_info):
                 # Join the 7 strings with a space (or any separator you prefer)
                 file.write(f"## {idx + 1} ##\n")
@@ -64,7 +64,10 @@ def main(
 
 if __name__ == "__main__":
     ROOT_DIR = os.path.dirname(__file__)
-    DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c1')]
+
+    DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c')]
+    # DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c4')]
+
     logger.info(f"Main root path: {ROOT_DIR}")
     logger.info(f"{DIR_PATHS}")
 

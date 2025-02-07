@@ -76,7 +76,7 @@ def identify_blank_pages(pdf_path: Optional[str] = None, document: Optional[fitz
         return None
 
 
-def extract_info_from_page_by_ocr(doc: fitz.Document):
+def extract_info_from_page_by_ocr(doc: fitz.Document, left_crop_x: Union[int, float]):
     page_number = 0
     page = doc[page_number]
 
@@ -90,7 +90,7 @@ def extract_info_from_page_by_ocr(doc: fitz.Document):
     # Crop the image
     cropped_img = crop_image(
         img=image,
-        left_crop=50,
+        left_crop=left_crop_x,
         top_crop=580,
         right_crop=50,
         bottom_crop=500
@@ -103,7 +103,7 @@ def extract_info_from_page_by_ocr(doc: fitz.Document):
     # Display the image using Pillow
     # image.show()
 
-    ocr_save_dir = 'output_ocr'
+    ocr_save_dir = 'res_output_ocr'
     if not os.path.exists(ocr_save_dir):
         os.makedirs(ocr_save_dir, exist_ok=True)
     image.save(os.path.join(ocr_save_dir, 'preprocessed_image.jpg'))
@@ -186,7 +186,7 @@ def add_white_rectangle_to_page(
     shape.finish(fill=color, color=None)  # Fill with color, no border
     shape.commit()  # Commit to the page
 
-    save_out_dir = "outputs_blurred"
+    save_out_dir = "res_outputs_blurred"
     # Save the modified PDF
     if not os.path.exists(save_out_dir):
         os.makedirs(save_out_dir, exist_ok=True)

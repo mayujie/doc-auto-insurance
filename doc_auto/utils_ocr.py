@@ -47,6 +47,7 @@ def extract_important_info_by_ocr(image):
         num_content_to_remove_space=0
     )
     payer_info[0] = payer_info[0] + " sp. z o.o."
+    payer_info[1] = "Polisa nr " + payer_info[1]
 
     if len(payer_info) != 3:
         raise ValueError("The length of payer_info is not 3. It is {}".format(len(payer_info)))

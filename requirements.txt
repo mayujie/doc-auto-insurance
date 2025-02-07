@@ -5,3 +5,5 @@ Pillow
 pikepdf
 pytesseract
 opencv-python
+openpyxl
+requests
