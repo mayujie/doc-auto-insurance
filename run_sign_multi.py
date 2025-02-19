@@ -15,8 +15,11 @@ def main(
         # (400, 220),
         # (230, 300)
 
-        (400, 170),
-        (230, 250)
+        (400, 200),
+        (230, 280)
+
+        # (400, 170),
+        # (230, 250)
     ]  # List of positions
     # width, height = 100, 100  # Resize the signature (optional)
     width, height = 120, 120  # Resize the signature (optional)
@@ -65,8 +68,8 @@ def main(
 if __name__ == "__main__":
     ROOT_DIR = os.path.dirname(__file__)
 
-    DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c')]
-    # DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c4')]
+    # DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c')]
+    DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c5')]
 
     logger.info(f"Main root path: {ROOT_DIR}")
     logger.info(f"{DIR_PATHS}")

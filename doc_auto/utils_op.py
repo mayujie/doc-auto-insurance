@@ -82,6 +82,7 @@ def insert_signatures(
                 info_nr_plate=info_nr_plate,
                 rect_x0=20,  # Top-left X
                 rect_y0=450.5,  # Top-left Y
+                # rect_y0=453.5,  # Top-left Y
                 rect_x1=400,  # Bottom-right X
                 rect_y1=580,  # Bottom-right Y
                 color=(1, 1, 1),
