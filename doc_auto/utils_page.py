@@ -147,6 +147,7 @@ def add_white_rectangle_to_page(
         pdf_doc: fitz.Document,
         info_1st_page: list,
         info_nr_plate: str,
+        idx_pdf_to_process: int,
         rect_x0, rect_y0, rect_x1, rect_y1,
         color: tuple = (1, 1, 1),
         page_number: int = 0
@@ -158,6 +159,7 @@ def add_white_rectangle_to_page(
         pdf_doc (fitz.Document): the input PDF document.
         info_1st_page (list): List of important information extracted from the first page.
         info_nr_plate (str): info_nr_plate from the first page.
+        idx_pdf_to_process (int): Current index number of pdf file to process.
         rect_x0 (float): X-coordinate of the top-left corner of the rectangle.
         rect_y0 (float): Y-coordinate of the top-left corner of the rectangle.
         rect_x1 (float): X-coordinate of the bottom-right corner of the rectangle.
@@ -196,7 +198,7 @@ def add_white_rectangle_to_page(
         output_path = os.path.join(save_out_dir, "_".join(save_file_key_info) + '.pdf')
     else:
         save_file_key_info = (info_nr_plate[0])
-        output_path = os.path.join(save_out_dir, f"{save_file_key_info}_polisy.pdf")
+        output_path = os.path.join(save_out_dir, f"{save_file_key_info}_polisy_{idx_pdf_to_process}.pdf")
         # output_path = os.path.join(save_out_dir, f"polisy.pdf")
     save_single_page(pdf_doc=pdf_document, page_number=page_number, output_path=output_path)
     print(f"White rectangle added to page {page_number + 1} and saved to {output_path}.")

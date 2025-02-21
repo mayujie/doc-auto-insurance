@@ -10,7 +10,7 @@ from .utils_page import identify_blank_pages
 from .utils_page import add_white_rectangle_to_page
 
 
-def identify_insert_page_according_blank_page(blank_page_number: int, num_doc_pages: int):
+def old_identify_insert_page_according_blank_page(blank_page_number: int, num_doc_pages: int):
     target_page_number = None
 
     if blank_page_number == 3:
@@ -23,15 +23,16 @@ def identify_insert_page_according_blank_page(blank_page_number: int, num_doc_pa
     if target_page_number is None:
         raise ValueError("target_page_number cannot be None")
 
-    return target_page_number
+    return [target_page_number]
 
 
 def insert_signatures(
         pdf_path: str,
         image_path: str,
         positions: list,
+        idx_pdf_to_process: int,
         output_path: Optional[str] = None,
-        page_number: Optional[int] = None,
+        page_numbers: Optional[list] = None,
         width=None,
         height=None,
         use_ocr: bool = False,
@@ -44,8 +45,9 @@ def insert_signatures(
         pdf_path (str): Path to the input PDF.
         output_path (str): Path to the output PDF.
         image_path (str): Path to the PNG image file.
+        idx_pdf_to_process (int): Current index number of pdf file to process.
         positions (list of tuples): List of (x, y) coordinates for the top-left corner of the image.
-        page_number (int): 1-based page number where the image will be added.
+        page_numbers (list): pages number where the image will be added.
         width (float, optional): Desired width of the image. If None, the original image width is used.
         height (float, optional): Desired height of the image. If None, the original image height is used.
 
@@ -87,29 +89,32 @@ def insert_signatures(
                 rect_y1=580,  # Bottom-right Y
                 color=(1, 1, 1),
                 page_number=0,
+                idx_pdf_to_process=idx_pdf_to_process,
             )
     else:
         info_1st_page = None
 
-    if page_number is None:
+    if page_numbers is None:
         blank_page_number = identify_blank_pages(document=pdf_document)
-        num_page_todo = identify_insert_page_according_blank_page(
+        num_pages_todo = old_identify_insert_page_according_blank_page(
             blank_page_number=blank_page_number,
             num_doc_pages=len(pdf_document)
         )
     else:
-        num_page_todo = page_number
+        num_pages_todo = page_numbers
 
     # Open the specified page
-    target_page = pdf_document[num_page_todo - 1]  # Convert to 0-based index
+    for page_todo, page_img_position in zip(num_pages_todo, positions):
+        target_page = pdf_document[page_todo - 1]  # Convert to 0-based index
 
-    # Insert the image at each position
-    for x, y in positions:
-        if width and height:
-            rect = fitz.Rect(x, y, x + width, y + height)
-        else:
-            rect = None  # Use the image's original dimensions
-        target_page.insert_image(rect, filename=image_path)
+        # Insert the image at each position
+        for img_coordinates in page_img_position:
+            for x, y in [img_coordinates]:
+                if width and height:
+                    rect = fitz.Rect(x, y, x + width, y + height)
+                else:
+                    rect = None  # Use the image's original dimensions
+                target_page.insert_image(rect, filename=image_path)
 
     # Save the updated PDF
     if output_path is None:

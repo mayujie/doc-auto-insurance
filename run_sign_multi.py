@@ -11,15 +11,13 @@ def main(
         use_ocr: bool = False,
         create_blurred_pdf: bool = True,
 ):
+    # sign_page_numbers = None  # Insert which page number
+    sign_page_numbers = [3, 5]  # Insert which page number
     positions = [
-        # (400, 220),
-        # (230, 300)
+        [(400, 190), (230, 250)],
+        # [(400, 190), (230, 250)]
 
-        (400, 200),
-        (230, 280)
-
-        # (400, 170),
-        # (230, 250)
+        [(400, 5), (230, 70)],
     ]  # List of positions
     # width, height = 100, 100  # Resize the signature (optional)
     width, height = 120, 120  # Resize the signature (optional)
@@ -35,9 +33,9 @@ def main(
         sign_filepath = os.path.join("assets_stamps", sign_filename)
 
         sub_d_path = os.path.join(ROOT_DIR, sub_d)
-        pdf_paths = [os.path.join(sub_d_path, f_name) for f_name in os.listdir(sub_d_path)]
+        pdf_paths = sorted([os.path.join(sub_d_path, f_name) for f_name in os.listdir(sub_d_path)])
 
-        for pdf_path in pdf_paths:
+        for idx_pdf_to_process, pdf_path in enumerate(pdf_paths):
             logger.info(f'Processing :{pdf_path}')
 
             extract_info = insert_signatures(
@@ -46,10 +44,11 @@ def main(
                 positions=positions,
                 width=width,
                 height=height,
-                page_number=None,
+                page_numbers=sign_page_numbers,
                 output_path=None,
                 use_ocr=use_ocr,
                 create_blurred_pdf=create_blurred_pdf,
+                idx_pdf_to_process=idx_pdf_to_process,
             )
             all_pdf_extracted_info.append(extract_info)
 
