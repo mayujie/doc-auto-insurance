@@ -1,10 +1,12 @@
+import os.path
+
 from PIL import Image
 from doc_auto.utils_img_op import crop_image
 
 
 def run_crop_image(
         input_path: str,
-        output_path: str,
+        output_path: str = None,
         left_crop: int = 0,
         top_crop: int = 300,
         right_crop: int = 0,
@@ -36,10 +38,20 @@ def run_crop_image(
     )
 
     # Save the cropped image
+    if output_path is None:
+        output_path = os.path.splitext(input_path)[0] + '_crop' + os.path.splitext(input_path)[1]
     cropped_img.save(output_path)
 
 
 # Example usage
-input_path = "assets_stamps/amu.png"
+input_path = "assets_stamps/sample_amu.png"
 output_path = "assets_stamps/cropped_image.png"
-run_crop_image(input_path, output_path, top_crop=300, bottom_crop=200)
+# output_path = None
+run_crop_image(input_path, output_path,
+               left_crop=980,
+               right_crop=860,
+               top_crop=1720,
+               # top_crop=0,
+               bottom_crop=1450,
+               # bottom_crop=0,
+               )

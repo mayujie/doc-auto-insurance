@@ -23,6 +23,7 @@ def crop_image(
     """
     # Get the dimensions of the image
     width, height = img.size
+    print(f'Original image dimensions WxH:{img.size}')
 
     # Define the cropping box (left, upper, right, lower)
     crop_box = (
@@ -34,5 +35,6 @@ def crop_image(
 
     # Crop the image
     cropped_img = img.crop(crop_box)
+    print(f'Crop image dimensions WxH:{cropped_img.size}')
 
     return cropped_img
