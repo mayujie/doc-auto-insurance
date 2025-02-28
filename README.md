@@ -24,15 +24,15 @@ auto fill insurance
 
    Compress each pdf file under `"res_outputs"` and save compressed pdf with suffix `_cps`
 
-6. [run_crop_img.py](run_crop_img.py)
+6. [srun_crop_img.py](srun_crop_img.py)
 
    Crop the image by specifying crop_box coordinate left, top, right and bottom.
 
-7. [run_make_img_transparent.py](run_make_img_transparent.py)
+7. [srun_make_img_transparent.py](srun_make_img_transparent.py)
 
    Convert white or near-white pixels in an image to transparent.
 
-8. [run_merge_two_imgs.py](run_merge_two_imgs.py)
+8. [srun_merge_two_imgs.py](srun_merge_two_imgs.py)
 
     - Merge two images by overlaying the background image onto the transparent image.
     - This function opens a transparent image and a background image, converts white pixels
