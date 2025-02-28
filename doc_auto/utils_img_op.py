@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageDraw
 
 
 def crop_image(
@@ -135,3 +135,45 @@ def merge_images_overlay_background_on_transparent(
 
     # Save the result
     combined_img.save(output_image_path, format="PNG")
+
+
+def overlay_rectangle_on_img(
+        input_path, output_path=None,
+        left_crop=0, right_crop=0, top_crop=0, bottom_crop=0,
+        debug: bool = False,
+):
+    """
+    Overlays a rectangle on the input image based on the specified crop values.
+
+    :param input_path: Path to the input PNG image file.
+    :param output_path: Path to save the output image. If None, the image will be displayed instead.
+    :param left_crop: Pixels to crop from the left.
+    :param right_crop: Pixels to crop from the right.
+    :param top_crop: Pixels to crop from the top.
+    :param bottom_crop: Pixels to crop from the bottom.
+    :param debug: display result rectangle with red border.
+    """
+    # Open the input image
+    image = Image.open(input_path)
+    print(image.size)
+    draw = ImageDraw.Draw(image)
+
+    # Calculate the rectangle coordinates
+    width, height = image.size
+    left = left_crop
+    top = top_crop
+    right = width - right_crop
+    bottom = height - bottom_crop
+
+    # Draw the rectangle
+    if debug:
+        draw.rectangle([left, top, right, bottom], outline="red", width=5)
+    else:
+        draw.rectangle([left, top, right, bottom], fill="white")
+
+    # Save or display the image
+    if output_path:
+        image.save(output_path)
+        print(f"Image saved to {output_path}")
+    else:
+        image.show()

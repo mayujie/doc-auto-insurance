@@ -40,6 +40,10 @@ auto fill insurance
       image's dimensions, overlays one image onto the other based on the `overlay_flip` flag,
       and saves the resulting image as a PNG file.
 
+9. [srun_overlay_white_img.py](srun_overlay_white_img.py)
+    
+   Overlays a rectangle on the input image based on the specified crop values.
+
 ### [poczta polska Wpłata na rachunek bankowy](https://cennik.poczta-polska.pl/druk,Bank.html)
 
 [Python处理PDF的第三方库对比
