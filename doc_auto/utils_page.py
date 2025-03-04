@@ -198,7 +198,7 @@ def add_white_rectangle_to_page(
         output_path = os.path.join(save_out_dir, "_".join(save_file_key_info) + '.pdf')
     else:
         save_file_key_info = (info_nr_plate[0])
-        output_path = os.path.join(save_out_dir, f"{save_file_key_info}_polisy_{idx_pdf_to_process}.pdf")
+        output_path = os.path.join(save_out_dir, f"{save_file_key_info}_polisy_{idx_pdf_to_process}_toC.pdf")
         # output_path = os.path.join(save_out_dir, f"polisy.pdf")
     save_single_page(pdf_doc=pdf_document, page_number=page_number, output_path=output_path)
     print(f"White rectangle added to page {page_number + 1} and saved to {output_path}.")

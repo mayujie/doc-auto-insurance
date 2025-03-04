@@ -68,7 +68,7 @@ if __name__ == "__main__":
     ROOT_DIR = os.path.dirname(__file__)
 
     # DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c')]
-    DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c5')]
+    DIR_PATHS = [d for d in os.listdir(ROOT_DIR) if d.startswith('c4')]
 
     logger.info(f"Main root path: {ROOT_DIR}")
     logger.info(f"{DIR_PATHS}")
