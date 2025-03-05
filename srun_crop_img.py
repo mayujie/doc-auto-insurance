@@ -8,9 +8,9 @@ def run_crop_image(
         input_path: str,
         output_path: str = None,
         left_crop: int = 0,
-        top_crop: int = 300,
+        top_crop: int = 0,
         right_crop: int = 0,
-        bottom_crop: int = 200
+        bottom_crop: int = 0
 ):
     """
     Crop the left, top, right and bottom of the image.
