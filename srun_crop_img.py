@@ -48,10 +48,9 @@ input_path = "assets_stamps/sample_amu.png"
 output_path = "assets_stamps/cropped_image.png"
 # output_path = None
 run_crop_image(input_path, output_path,
-               left_crop=980,
+               left_crop=0,
+               top_crop=0,
                right_crop=860,
-               top_crop=1720,
-               # top_crop=0,
                bottom_crop=1450,
                # bottom_crop=0,
                )
